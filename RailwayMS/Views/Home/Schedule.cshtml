@@ -1,0 +1,79 @@
+﻿@model IEnumerable<RailwayMS.Models.Main_Schedule_Details>
+
+@{
+    ViewBag.Title = "Schedule";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <center>
+        <h2>Schedule Information</h2>
+    </center>
+    <div class="row" style="margin-top:20px;">
+            <div class="leftnav">
+                <span style="margin-bottom:5px; font:bold ">
+                    <center>
+
+                        <form method="post" action="">
+                            <div class="search">
+                                <input type="text" name="Search" class="searchTerm" placeholder="Search Train">
+                                <input type="submit" value="Search" class="btn btn-sm btn-success glyphicon-search" />
+                            </div>
+                            <br />
+                        </form>
+                    </center>
+                </span>
+            </div>
+
+        </div>
+
+
+
+        <table class="table table-bordered table-condensed">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Day)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Route.Name)
+                </th>            
+                <th>
+                   Train
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.ArrivalTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ReachedTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+
+            </tr>
+
+            @foreach (var item in Model)
+            {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Day)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Route.Name)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.train.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArrivalTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReachedTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+        </tr>
+            }
+
+        </table>

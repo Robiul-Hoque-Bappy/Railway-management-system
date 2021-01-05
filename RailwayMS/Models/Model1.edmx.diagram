@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0dcdbefa252840e7846f5b4d695b73e0" Name="Diagram1" ZoomLevel="87">
+        <EntityTypeShape EntityType="RailwayMSDbModel.station" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RailwayMSDbModel.train" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RailwayMSDbModel.UserTable" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="RailwayMSDbModel.Main_Schedule" Width="1.5" PointX="11.875" PointY="5.375" />
+        <EntityTypeShape EntityType="RailwayMSDbModel.Main_Schedule_Details" Width="1.5" PointX="9.625" PointY="7.125" />
+        <EntityTypeShape EntityType="RailwayMSDbModel.Route" Width="1.5" PointX="7.375" PointY="4.75" />
+        <EntityTypeShape EntityType="RailwayMSDbModel.Sub_Route" Width="1.5" PointX="9.625" PointY="10.25" />
+        <AssociationConnector Association="RailwayMSDbModel.FK_Main_Schedule_Main_Schedule_Route" />
+        <AssociationConnector Association="RailwayMSDbModel.FK_Main_Schedule_Main_Schedule_SubRoute" />
+        <AssociationConnector Association="RailwayMSDbModel.FK_Main_Schedule_train" />
+        <AssociationConnector Association="RailwayMSDbModel.FK_Main_Schedule_Details_Route" />
+        <AssociationConnector Association="RailwayMSDbModel.FK_Sub_Route_Route" />
+        <EntityTypeShape EntityType="RailwayMSDbModel.DaysList" Width="1.5" PointX="7.375" PointY="0.75" />
+        <AssociationConnector Association="RailwayMSDbModel.FK_Main_Schedule_Details_Main_Schedule_Train" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

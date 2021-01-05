@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RailwayMSDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="station">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="train">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="speed" Type="Double" />
+    <NavigationProperty Name="Main_Schedule" Relationship="RailwayMSDbModel.FK_Main_Schedule_train" FromRole="train" ToRole="Main_Schedule" />
+    <NavigationProperty Name="Main_Schedule_Details" Relationship="RailwayMSDbModel.FK_Main_Schedule_Details_Main_Schedule_Train" FromRole="train" ToRole="Main_Schedule_Details" />
+  </EntityType>
+  <EntityContainer Name="RailwayMSDbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="stations" EntityType="Self.station" />
+    <EntitySet Name="trains" EntityType="Self.train" />
+    <EntitySet Name="UserTables" EntityType="RailwayMSDbModel.UserTable" />
+    <EntitySet Name="Main_Schedule" EntityType="RailwayMSDbModel.Main_Schedule" />
+    <EntitySet Name="Main_Schedule_Details" EntityType="RailwayMSDbModel.Main_Schedule_Details" />
+    <EntitySet Name="Routes" EntityType="RailwayMSDbModel.Route" />
+    <EntitySet Name="Sub_Route" EntityType="RailwayMSDbModel.Sub_Route" />
+    <AssociationSet Name="FK_Main_Schedule_Main_Schedule_Route" Association="RailwayMSDbModel.FK_Main_Schedule_Main_Schedule_Route">
+      <End Role="Route" EntitySet="Routes" />
+      <End Role="Main_Schedule" EntitySet="Main_Schedule" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Main_Schedule_Main_Schedule_SubRoute" Association="RailwayMSDbModel.FK_Main_Schedule_Main_Schedule_SubRoute">
+      <End Role="Sub_Route" EntitySet="Sub_Route" />
+      <End Role="Main_Schedule" EntitySet="Main_Schedule" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Main_Schedule_train" Association="RailwayMSDbModel.FK_Main_Schedule_train">
+      <End Role="train" EntitySet="trains" />
+      <End Role="Main_Schedule" EntitySet="Main_Schedule" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Main_Schedule_Details_Route" Association="RailwayMSDbModel.FK_Main_Schedule_Details_Route">
+      <End Role="Route" EntitySet="Routes" />
+      <End Role="Main_Schedule_Details" EntitySet="Main_Schedule_Details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sub_Route_Route" Association="RailwayMSDbModel.FK_Sub_Route_Route">
+      <End Role="Route" EntitySet="Routes" />
+      <End Role="Sub_Route" EntitySet="Sub_Route" />
+    </AssociationSet>
+    <EntitySet Name="DaysLists" EntityType="RailwayMSDbModel.DaysList" />
+    <AssociationSet Name="FK_Main_Schedule_Details_Main_Schedule_Train" Association="RailwayMSDbModel.FK_Main_Schedule_Details_Main_Schedule_Train">
+      <End Role="train" EntitySet="trains" />
+      <End Role="Main_Schedule_Details" EntitySet="Main_Schedule_Details" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="UserTable">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UserPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Main_Schedule">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TrainId" Type="Int32" />
+    <Property Name="SubRouteId" Type="Int32" />
+    <Property Name="RouteId" Type="Int32" />
+    <Property Name="Day" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="ArrivalTime" Type="Double" />
+    <Property Name="DepartureTime" Type="Double" />
+    <Property Name="IsActive" Type="Boolean" />
+    <NavigationProperty Name="Route" Relationship="RailwayMSDbModel.FK_Main_Schedule_Main_Schedule_Route" FromRole="Main_Schedule" ToRole="Route" />
+    <NavigationProperty Name="Sub_Route" Relationship="RailwayMSDbModel.FK_Main_Schedule_Main_Schedule_SubRoute" FromRole="Main_Schedule" ToRole="Sub_Route" />
+    <NavigationProperty Name="train" Relationship="RailwayMSDbModel.FK_Main_Schedule_train" FromRole="Main_Schedule" ToRole="train" />
+  </EntityType>
+  <EntityType Name="Main_Schedule_Details">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Day" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RouteId" Type="Int32" />
+    <Property Name="ArrivalTime" Type="Double" />
+    <Property Name="ReachedTime" Type="Double" />
+    <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Route" Relationship="RailwayMSDbModel.FK_Main_Schedule_Details_Route" FromRole="Main_Schedule_Details" ToRole="Route" />
+    <Property Name="TrainId" Type="Int32" />
+    <NavigationProperty Name="train" Relationship="RailwayMSDbModel.FK_Main_Schedule_Details_Main_Schedule_Train" FromRole="Main_Schedule_Details" ToRole="train" />
+  </EntityType>
+  <EntityType Name="Route">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" />
+    <NavigationProperty Name="Main_Schedule" Relationship="RailwayMSDbModel.FK_Main_Schedule_Main_Schedule_Route" FromRole="Route" ToRole="Main_Schedule" />
+    <NavigationProperty Name="Main_Schedule_Details" Relationship="RailwayMSDbModel.FK_Main_Schedule_Details_Route" FromRole="Route" ToRole="Main_Schedule_Details" />
+    <NavigationProperty Name="Sub_Route" Relationship="RailwayMSDbModel.FK_Sub_Route_Route" FromRole="Route" ToRole="Sub_Route" />
+  </EntityType>
+  <EntityType Name="Sub_Route">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Station_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RouteId" Type="Int32" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Main_Schedule" Relationship="RailwayMSDbModel.FK_Main_Schedule_Main_Schedule_SubRoute" FromRole="Sub_Route" ToRole="Main_Schedule" />
+    <NavigationProperty Name="Route" Relationship="RailwayMSDbModel.FK_Sub_Route_Route" FromRole="Sub_Route" ToRole="Route" />
+    <Property Name="Distance" Type="Double" />
+    <Property Name="ShortOrder" Type="Int32" />
+  </EntityType>
+  <Association Name="FK_Main_Schedule_Main_Schedule_Route">
+    <End Type="RailwayMSDbModel.Route" Role="Route" Multiplicity="0..1" />
+    <End Type="RailwayMSDbModel.Main_Schedule" Role="Main_Schedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Route">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Main_Schedule">
+        <PropertyRef Name="RouteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Main_Schedule_Main_Schedule_SubRoute">
+    <End Type="RailwayMSDbModel.Sub_Route" Role="Sub_Route" Multiplicity="0..1" />
+    <End Type="RailwayMSDbModel.Main_Schedule" Role="Main_Schedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sub_Route">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Main_Schedule">
+        <PropertyRef Name="SubRouteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Main_Schedule_train">
+    <End Type="RailwayMSDbModel.train" Role="train" Multiplicity="0..1" />
+    <End Type="RailwayMSDbModel.Main_Schedule" Role="Main_Schedule" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="train">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Main_Schedule">
+        <PropertyRef Name="TrainId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Main_Schedule_Details_Route">
+    <End Type="RailwayMSDbModel.Route" Role="Route" Multiplicity="0..1" />
+    <End Type="RailwayMSDbModel.Main_Schedule_Details" Role="Main_Schedule_Details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Route">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Main_Schedule_Details">
+        <PropertyRef Name="RouteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sub_Route_Route">
+    <End Type="RailwayMSDbModel.Route" Role="Route" Multiplicity="0..1" />
+    <End Type="RailwayMSDbModel.Sub_Route" Role="Sub_Route" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Route">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sub_Route">
+        <PropertyRef Name="RouteId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="DaysList">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DayName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_Main_Schedule_Details_Main_Schedule_Train">
+    <End Type="RailwayMSDbModel.train" Role="train" Multiplicity="0..1" />
+    <End Type="RailwayMSDbModel.Main_Schedule_Details" Role="Main_Schedule_Details" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="train">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Main_Schedule_Details">
+        <PropertyRef Name="TrainId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

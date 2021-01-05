@@ -1,0 +1,110 @@
+﻿@model IEnumerable<RailwayMS.Models.Main_Schedule>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<center>
+    <h2>Main Schedule Information</h2>
+    <input type="text" class="form-control" name="serach" placeholder="Search Train" />
+</center>
+
+
+<p>
+    <a href="../Main_Schedule/Create" class="btn btn-lg btn-success">Create New</a>
+</p>
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+<table class="table table-striped table table-bordered text-center">
+    <tr>
+        <th>
+            Station
+        </th>
+        <th>
+            Day
+        </th>
+        <th>
+            Train
+        </th>
+        <th>
+            Route
+        </th>
+
+        <th>
+            Arrival Time[24-hour]
+        </th>
+        <th>Departure Time[24-hour]</th>
+        <th>#</th>
+    </tr>
+    @{
+        var routeid = 0;
+        var day = "";
+      
+    }
+
+    @foreach (var item in Model.GroupBy(x => x.RouteId))
+    {
+
+
+        foreach (var item2 in item.OrderBy(x=>x.Day))
+        {
+
+            var count = item.Count(x => x.RouteId == item2.RouteId);
+            var dayCount = item.Count(x => x.RouteId == item2.RouteId && x.Day == item2.Day);
+
+<tr>
+
+    @if (item2.RouteId != routeid)
+    {
+        <td rowspan=@count class="" >
+            <b> @Html.DisplayFor(modelItem => item2.Route.Name)</b>  
+        </td>
+    }
+    @if (item2.Day != day)
+    {
+        <td rowspan=@dayCount> 
+            <b> @Html.DisplayFor(modelItem => item2.Day)</b> 
+        </td>
+    }
+
+    @{
+        routeid = Convert.ToInt32(item2.RouteId);
+        day = item2.Day;
+    }
+
+
+
+    <td>
+        @Html.DisplayFor(modelItem => item2.train.name)
+    </td>
+
+    <td>
+        @Html.DisplayFor(modelItem => item2.Sub_Route.Station_Name)
+    </td>
+    <td>
+        @string.Format("{0:00.00}", item2.ArrivalTime)
+
+    </td>
+    <td>
+        @string.Format("{0:00.00}", item2.DepartureTime)
+    </td>
+
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item2.Id }, new { @class = "btn btn-sm btn-warning" }) |
+        @Html.ActionLink("Details", "Details", new { id = item2.Id }, new { @class = "btn btn-sm btn-info" }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item2.Id }, new { @class = "btn btn-sm btn-danger" })
+    </td>
+
+
+
+</tr>
+
+        }
+        @*</tr>*@
+
+    }
+
+</table>

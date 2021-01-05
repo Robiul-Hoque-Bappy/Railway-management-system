@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="RailwayMSDbModelStoreContainer" CdmEntityContainer="RailwayMSDbEntities">
+    <EntitySetMapping Name="stations">
+      <EntityTypeMapping TypeName="RailwayMSDbModel.station">
+        <MappingFragment StoreEntitySet="station">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="trains">
+      <EntityTypeMapping TypeName="RailwayMSDbModel.train">
+        <MappingFragment StoreEntitySet="train">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="speed" ColumnName="speed" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserTables">
+      <EntityTypeMapping TypeName="RailwayMSDbModel.UserTable">
+        <MappingFragment StoreEntitySet="UserTable">
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Main_Schedule">
+      <EntityTypeMapping TypeName="RailwayMSDbModel.Main_Schedule">
+        <MappingFragment StoreEntitySet="Main_Schedule">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="DepartureTime" ColumnName="DepartureTime" />
+          <ScalarProperty Name="ArrivalTime" ColumnName="ArrivalTime" />
+          <ScalarProperty Name="Day" ColumnName="Day" />
+          <ScalarProperty Name="RouteId" ColumnName="RouteId" />
+          <ScalarProperty Name="SubRouteId" ColumnName="SubRouteId" />
+          <ScalarProperty Name="TrainId" ColumnName="TrainId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Main_Schedule_Details">
+      <EntityTypeMapping TypeName="RailwayMSDbModel.Main_Schedule_Details">
+        <MappingFragment StoreEntitySet="Main_Schedule_Details">
+          <ScalarProperty Name="TrainId" ColumnName="TrainId" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="ReachedTime" ColumnName="ReachedTime" />
+          <ScalarProperty Name="ArrivalTime" ColumnName="ArrivalTime" />
+          <ScalarProperty Name="RouteId" ColumnName="RouteId" />
+          <ScalarProperty Name="Day" ColumnName="Day" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Routes">
+      <EntityTypeMapping TypeName="RailwayMSDbModel.Route">
+        <MappingFragment StoreEntitySet="Route">
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sub_Route">
+      <EntityTypeMapping TypeName="RailwayMSDbModel.Sub_Route">
+        <MappingFragment StoreEntitySet="Sub_Route">
+          <ScalarProperty Name="ShortOrder" ColumnName="ShortOrder" />
+          <ScalarProperty Name="Distance" ColumnName="Distance" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="RouteId" ColumnName="RouteId" />
+          <ScalarProperty Name="Station_Name" ColumnName="Station_Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DaysLists">
+      <EntityTypeMapping TypeName="RailwayMSDbModel.DaysList">
+        <MappingFragment StoreEntitySet="DaysList">
+          <ScalarProperty Name="DayName" ColumnName="DayName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,49 @@
+﻿@model IEnumerable<RailwayMS.Models.Sub_Route>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table table-bordered table-striped" >
+    <tr >
+        <th class="text-center">
+            Station Name
+        </th>
+        <th class="text-center">
+            Route Name
+        </th>
+
+        <th class="text-center">
+            Distance(Km)
+        </th>
+        <th class="text-center">
+        #
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Station_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Route.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Distance)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
